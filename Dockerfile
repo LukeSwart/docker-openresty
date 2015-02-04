@@ -30,6 +30,7 @@ RUN    wget http://openresty.org/download/ngx_openresty-1.7.7.1.tar.gz \
   && make install \
   && rm -rf /ngx_openresty*
   
+# Copies the nginx file to the container's filesystem
 ADD nginx.conf nginx.conf
 
 EXPOSE 80
