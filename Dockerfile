@@ -16,7 +16,8 @@ RUN    apt-get -y install wget vim git libpq-dev curl
 RUN mkdir /duwamish
 RUN mkdir /logs
 RUN mkdir -p /var/log/nginx
-VOLUME ["/duwamish/staticfiles"]
+RUN mkdir /var/www
+# VOLUME ["/duwamish/staticfiles"]
 
 # Openresty (Nginx)
 RUN    apt-get -y build-dep nginx \
