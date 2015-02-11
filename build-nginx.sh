@@ -1,2 +1,2 @@
-docker build -t lukeswart/flavors-nginx .
+docker build -t lukeswart/duwamish-nginx .
 

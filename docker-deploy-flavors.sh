@@ -31,6 +31,6 @@ docker run -d \
     -p ${PORT}:${PORT} \
     -e "FLAVOR=${FLAVOR}" \
     --env-file .env \
-    -it lukeswart/duwamish-dev \
+    -it lukeswart/duwamish \
     sh -c "${command}" 
 
