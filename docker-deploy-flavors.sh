@@ -26,7 +26,9 @@ fi
 echo "PORT is $PORT"
 command="./src/manage.py compilemessages && gunicorn wsgi:application -w 3 -b 0.0.0.0:${PORT} --log-level=debug"
 
+echo "killing flavor container:"
 docker kill $FLAVOR
+echo "removing flavor container:"
 docker rm $FLAVOR
 
 docker run -d \
