@@ -26,6 +26,9 @@ fi
 echo "PORT is $PORT"
 command="./src/manage.py compilemessages && gunicorn wsgi:application -w 3 -b 0.0.0.0:${PORT} --log-level=debug"
 
+docker kill $FLAVOR
+docker rm $FLAVOR
+
 docker run -d \
     --name $FLAVOR \
     -p ${PORT}:${PORT} \
