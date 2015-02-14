@@ -1,3 +1,4 @@
+#!/bin/bash
 docker run -d \
   --name "nginx" \
   --volumes-from duwamish_flavor \
