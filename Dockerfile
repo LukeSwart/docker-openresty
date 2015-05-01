@@ -32,7 +32,10 @@ RUN    wget http://openresty.org/download/ngx_openresty-1.7.7.1.tar.gz \
   && rm -rf /ngx_openresty*
   
 # Copies the nginx file to the container's filesystem
+ADD ssl ssl
 ADD nginx.conf nginx.conf
 
 EXPOSE 80
+EXPOSE 443
+EXPOSE 9090
 CMD /usr/local/openresty/nginx/sbin/nginx -p `pwd` -c nginx.conf
