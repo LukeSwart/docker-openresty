@@ -12,12 +12,6 @@ RUN    apt-get update
 RUN    apt-get upgrade -y
 RUN    apt-get -y install wget vim git libpq-dev curl
 
-# App specifics
-RUN mkdir /duwamish
-RUN mkdir /logs
-RUN mkdir -p /var/log/nginx
-RUN mkdir /var/www
-
 # Openresty (Nginx)
 RUN apt-get -y build-dep nginx \
   && apt-get -q -y clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
@@ -28,6 +22,12 @@ RUN wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz \
   && make \
   && make install \
   && rm -rf /ngx_openresty*
+
+# App specifics
+RUN mkdir /duwamish
+RUN mkdir /logs
+RUN mkdir -p /var/log/nginx
+RUN mkdir /var/www
 
 EXPOSE 80
 EXPOSE 443
