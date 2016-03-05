@@ -13,22 +13,24 @@ RUN    apt-get upgrade -y
 RUN    apt-get -y install wget vim git libpq-dev curl
 
 # App specifics
-RUN mkdir /duwamish
 RUN mkdir /logs
 RUN mkdir -p /var/log/nginx
 RUN mkdir /var/www
-# VOLUME ["/duwamish/staticfiles"]
 
 # Openresty (Nginx)
 RUN    apt-get -y build-dep nginx \
   && apt-get -q -y clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
-RUN    wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz \
-  && tar xvfz ngx_openresty-1.7.10.1.tar.gz \
-  && cd ngx_openresty-1.7.10.1 \
+RUN    wget https://openresty.org/download/openresty-1.9.7.3.tar.gz \
+  && tar xvfz openresty-1.9.7.3.tar.gz \
+  && cd openresty-1.9.7.3 \
   && ./configure --with-luajit  --with-http_addition_module --with-http_dav_module --with-http_geoip_module --with-http_gzip_static_module --with-http_image_filter_module --with-http_realip_module --with-http_stub_status_module --with-http_ssl_module --with-http_sub_module --with-http_xslt_module --with-ipv6 --with-http_postgres_module --with-pcre-jit \
   && make \
   && make install \
-  && rm -rf /ngx_openresty*
+  && rm -rf /openresty*
+
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Copies the nginx file to the container's filesystem
 ADD nginx.conf nginx.conf
